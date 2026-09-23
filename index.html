@@ -3,25 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qur’anic Arabic Vocabulary</title>
+
+<title>Qur'anic Arabic Vocabulary</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#f5f7f9;
-  color:#17202a;
+  background:#f5f7f6;
+  color:#222;
+  font-family:"Noto Sans Bengali",sans-serif;
 }
 
+button,input{font-family:"Noto Sans Bengali",sans-serif}
+
 header{
-  background:#ffffff;
-  padding:18px 16px;
+  background:#075e54;
+  color:white;
   text-align:center;
-  border-bottom:1px solid #ddd;
+  padding:18px 12px;
 }
 
 header h1{
@@ -29,18 +35,17 @@ header h1{
   font-size:23px;
 }
 
-#topProgress{
-  margin-top:7px;
-  color:#666;
+header p{
+  margin:4px 0 0;
   font-size:14px;
 }
 
 nav{
   display:flex;
-  justify-content:center;
-  gap:8px;
-  padding:12px;
+  gap:5px;
+  overflow-x:auto;
   background:white;
+  padding:9px 7px;
   border-bottom:1px solid #ddd;
   position:sticky;
   top:0;
@@ -48,275 +53,343 @@ nav{
 }
 
 nav button{
+  flex:1;
+  min-width:75px;
   border:0;
-  background:#eee;
-  padding:11px 14px;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:14px;
+  border-radius:8px;
+  padding:9px 5px;
+  background:#edf2f0;
+  font-size:13px;
+  white-space:nowrap;
 }
 
 nav button.active{
-  background:#222;
+  background:#075e54;
   color:white;
 }
 
-main{
+.container{
   max-width:650px;
   margin:auto;
   padding:18px 14px 40px;
 }
 
-.hero{
-  text-align:center;
-  margin-bottom:20px;
-}
-
-.hero h2{
-  margin:5px 0;
-}
-
-.hero p{
-  color:#666;
-}
-
-.section{
-  display:none;
-}
-
-.section.active{
-  display:block;
-}
+.section{display:none}
+.section.active{display:block}
 
 .card{
   background:white;
-  border-radius:18px;
-  padding:22px;
-  margin-bottom:16px;
-  box-shadow:0 3px 12px rgba(0,0,0,.07);
+  border-radius:16px;
+  padding:20px 15px;
+  box-shadow:0 3px 15px rgba(0,0,0,.07);
 }
 
-.flashcard{
-  min-height:220px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.counter{
   text-align:center;
-  cursor:pointer;
-  user-select:none;
-  border:2px solid #eee;
-}
-
-.flashcard .arabic{
-  font-size:48px;
-  direction:rtl;
-  margin-bottom:15px;
-}
-
-.flashcard .meaning{
-  font-size:28px;
-  font-weight:bold;
-}
-
-.tapHint{
-  color:#888;
-  font-size:13px;
-  margin-top:12px;
-}
-
-.buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:12px;
-}
-
-button{
-  border:0;
-  border-radius:11px;
-  padding:13px 14px;
-  font-size:15px;
-  cursor:pointer;
-}
-
-.primary{
-  background:#222;
-  color:white;
-}
-
-.secondary{
-  background:#e9ecef;
-  color:#222;
-}
-
-.green{
-  background:#dff5e5;
-  color:#176b2c;
-}
-
-.example{
-  text-align:center;
-}
-
-.ayah{
-  font-size:25px;
-  line-height:1.8;
-  direction:rtl;
-  margin:12px 0;
-}
-
-.translation{
-  color:#555;
-  line-height:1.6;
-}
-
-.ref{
-  color:#888;
-  font-size:13px;
-  margin-top:8px;
-}
-
-/* Practice */
-
-.practice-menu{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.practice-mode{
-  background:white;
-  border:1px solid #ddd;
-  border-radius:15px;
-  padding:18px 12px;
-  text-align:center;
-  cursor:pointer;
-}
-
-.practice-mode strong{
-  display:block;
-  margin-bottom:6px;
-}
-
-.practice-mode span{
-  color:#777;
-  font-size:13px;
-}
-
-.question-number{
   color:#777;
   font-size:14px;
+  margin-bottom:8px;
+}
+
+.category-title{
+  text-align:center;
+  color:#075e54;
+  font-weight:700;
+  font-size:17px;
   margin-bottom:12px;
 }
 
-.question-arabic{
-  font-size:42px;
-  direction:rtl;
-  text-align:center;
-  margin:22px 0;
+/* CATEGORY LIST */
+
+.category-list{
+  display:grid;
+  gap:8px;
+  margin-bottom:18px;
 }
 
-.question-bangla{
-  font-size:28px;
+.category{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:12px;
+  text-align:left;
+  background:#edf2f0;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.category.unlocked{
+  cursor:pointer;
+}
+
+.category.unlocked:hover{
+  background:#dfeae7;
+}
+
+.category.current{
+  background:#075e54;
+  color:white;
+}
+
+.category.locked{
+  color:#888;
+  background:#f0f0f0;
+  cursor:not-allowed;
+}
+
+.category small{
+  font-size:12px;
+}
+
+.category-progress{
+  font-size:12px;
+  white-space:nowrap;
+}
+
+/* Arabic */
+
+.arabic-word{
+  font-family:"Noto Naskh Arabic",serif !important;
+  direction:rtl;
+  unicode-bidi:plaintext;
   text-align:center;
-  font-weight:bold;
-  margin:22px 0;
+  font-size:55px;
+  font-weight:600;
+  line-height:1.9;
+  color:#111;
+  cursor:pointer;
+  user-select:none;
+  margin:5px 0;
+}
+
+.meaning{
+  font-family:"Noto Sans Bengali",sans-serif !important;
+  text-align:center;
+  font-size:21px;
+  font-weight:600;
+  color:#075e54;
+  min-height:42px;
+  margin:5px 0 14px;
+}
+
+.hidden{visibility:hidden}
+
+.example-btn{
+  width:100%;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid #075e54;
+  background:white;
+  color:#075e54;
+  font-size:15px;
+}
+
+.example-box{
+  display:none;
+  background:#f1f8f5;
+  border-radius:12px;
+  padding:15px 10px;
+  margin-top:10px;
+  text-align:center;
+}
+
+.example-box.show{display:block}
+
+.example-arabic{
+  font-family:"Noto Naskh Arabic",serif !important;
+  direction:rtl;
+  unicode-bidi:plaintext;
+  font-size:31px;
+  line-height:2;
+  color:#111;
+}
+
+.example-bangla{
+  font-family:"Noto Sans Bengali",sans-serif !important;
+  font-size:17px;
+  line-height:1.8;
+  margin-top:8px;
+}
+
+.reference{
+  font-size:14px;
+  color:#075e54;
+  font-weight:600;
+  margin-top:7px;
+}
+
+.actions{
+  display:flex;
+  gap:9px;
+  margin-top:17px;
+}
+
+.actions button{
+  flex:1;
+  border:0;
+  border-radius:10px;
+  padding:12px 6px;
+  font-size:14px;
+}
+
+.learned-btn{
+  background:#075e54;
+  color:white;
+}
+
+.study-btn{
+  background:#e8edeb;
+  color:#222;
+}
+
+.back-btn{
+  width:100%;
+  margin-top:10px;
+  border:0;
+  background:#333;
+  color:white;
+  border-radius:10px;
+  padding:11px;
+}
+
+/* PRACTICE */
+
+.modes{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-bottom:15px;
+}
+
+.modes button{
+  border:0;
+  border-radius:9px;
+  padding:10px 5px;
+  background:#edf2f0;
+  font-size:13px;
+}
+
+.modes button.active{
+  background:#075e54;
+  color:white;
+}
+
+.practice-count{
+  text-align:center;
+  color:#777;
+  font-size:14px;
+}
+
+.question-label{
+  text-align:center;
+  color:#777;
+  margin-top:15px;
+}
+
+#practiceQuestion{
+  font-family:"Noto Naskh Arabic",serif !important;
+  direction:rtl;
+  text-align:center;
+  font-size:42px;
+  line-height:1.8;
+  font-weight:600;
+  margin:8px 0 20px;
+}
+
+#practiceQuestion.bangla{
+  font-family:"Noto Sans Bengali",sans-serif !important;
+  direction:ltr;
+  font-size:25px;
 }
 
 .options{
   display:grid;
-  gap:10px;
+  gap:9px;
 }
 
 .option{
-  background:#f0f2f4;
-  text-align:left;
-  border:2px solid transparent;
-}
-
-.option:hover{
-  border-color:#aaa;
+  border:1px solid #ddd;
+  background:white;
+  border-radius:10px;
+  padding:12px;
+  font-size:16px;
 }
 
 .option.correct{
-  background:#dff5e5;
-  border-color:#3a9d52;
+  background:#d9f3e5;
+  border-color:#16844a;
 }
 
 .option.wrong{
-  background:#ffe1e1;
-  border-color:#d44;
+  background:#f7dddd;
+  border-color:#c33;
+}
+
+.answer-input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:17px;
+  text-align:center;
+  margin-bottom:9px;
+}
+
+.check-btn,
+.next-btn{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:12px;
+  font-size:15px;
+}
+
+.check-btn{
+  background:#075e54;
+  color:white;
+}
+
+.next-btn{
+  background:#333;
+  color:white;
+  margin-top:10px;
+  display:none;
 }
 
 .feedback{
-  min-height:25px;
   text-align:center;
-  margin:15px 0;
-  font-weight:bold;
+  font-weight:600;
+  min-height:27px;
+  margin-top:10px;
 }
 
-.answerInput{
-  width:100%;
-  padding:15px;
-  border:1px solid #ccc;
-  border-radius:12px;
-  font-size:18px;
-  margin-bottom:10px;
-  text-align:center;
-}
-
-.practiceResult{
-  text-align:center;
-}
-
-.score{
-  font-size:42px;
-  font-weight:bold;
-  margin:15px;
-}
-
-/* Progress */
+/* PROGRESS */
 
 .stats{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:10px;
 }
 
 .stat{
   background:white;
-  border-radius:15px;
-  padding:20px;
+  border-radius:13px;
+  padding:18px 8px;
   text-align:center;
+  box-shadow:0 2px 9px rgba(0,0,0,.05);
 }
 
-.stat strong{
-  display:block;
-  font-size:30px;
-  margin-bottom:5px;
-}
-
-/* Review */
-
-.reviewItem{
-  background:white;
-  border-radius:15px;
-  padding:16px;
-  margin-bottom:10px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.reviewArabic{
+.stat-number{
+  color:#075e54;
   font-size:28px;
-  direction:rtl;
+  font-weight:700;
 }
 
-.reviewMeaning{
+.stat-label{
   color:#666;
-  margin-top:5px;
+  font-size:14px;
 }
 
 .empty{
@@ -325,29 +398,20 @@ button{
   padding:30px 10px;
 }
 
-.reset{
-  width:100%;
-  margin-top:20px;
-  background:#ffe2e2;
-  color:#a11;
+.unlock-message{
+  background:#f1f8f5;
+  border-radius:11px;
+  padding:12px;
+  margin-bottom:14px;
+  text-align:center;
+  color:#075e54;
+  font-size:14px;
 }
 
-@media(max-width:480px){
-  .practice-menu{
-    grid-template-columns:1fr;
-  }
-
-  .flashcard .arabic{
-    font-size:42px;
-  }
-
-  .question-arabic{
-    font-size:36px;
-  }
-
-  .buttons{
-    grid-template-columns:1fr;
-  }
+@media(max-width:450px){
+  .arabic-word{font-size:49px}
+  .example-arabic{font-size:27px}
+  #practiceQuestion{font-size:36px}
 }
 </style>
 </head>
@@ -355,52 +419,96 @@ button{
 <body>
 
 <header>
-  <h1>📖 Qur’anic Arabic Vocabulary</h1>
-  <div id="topProgress">0 / 20 মুখস্থ</div>
+  <h1>📖 Qur'anic Arabic</h1>
+  <p>কুরআনের আরবি শব্দ শেখা</p>
 </header>
 
 <nav>
-  <button class="navBtn active" onclick="showSection('learn',this)">Learn</button>
-  <button class="navBtn" onclick="showSection('practice',this)">Practice</button>
-  <button class="navBtn" onclick="showSection('progress',this)">Progress</button>
-  <button class="navBtn" onclick="showSection('review',this)">Review</button>
+  <button id="navLearn" class="active" onclick="showSection('learn')">
+    📖 Learn
+  </button>
+
+  <button id="navPractice" onclick="showSection('practice')">
+    📝 Practice
+  </button>
+
+  <button id="navReview" onclick="showSection('review')">
+    📚 Review
+  </button>
+
+  <button id="navLearned" onclick="showSection('learned')">
+    ✓ মুখস্থ
+  </button>
+
+  <button id="navProgress" onclick="showSection('progress')">
+    📊 Progress
+  </button>
 </nav>
 
-<main>
-
-<div class="hero">
-  <h2>Learn • Practice • Review</h2>
-  <p>কুরআনের আরবি শব্দ শেখো</p>
-</div>
+<div class="container">
 
 <!-- ================= LEARN ================= -->
 
 <section id="learn" class="section active">
 
-  <div class="card">
-    <div id="learnCount"></div>
+<div class="card">
 
-    <div class="flashcard" onclick="flipCard()">
-      <div>
-        <div id="learnArabic" class="arabic"></div>
-        <div id="learnMeaning" class="meaning" style="display:none;"></div>
-        <div class="tapHint">শব্দের অর্থ দেখতে ট্যাপ করুন</div>
-      </div>
-    </div>
+<div class="category-title">
+  📚 ১৫০টি প্রাথমিক শব্দ
+</div>
 
-    <div class="buttons">
-      <button class="green" onclick="markMastered()">✓ মুখস্থ হয়েছে</button>
-      <button class="secondary" onclick="markStudy()">📖 পড়তে হবে</button>
-    </div>
-  </div>
+<div id="categoryList" class="category-list"></div>
 
-  <div class="card example">
-    <h3>📖 কুরআনের উদাহরণ</h3>
-    <div id="learnAyah" class="ayah"></div>
-    <div id="learnTranslation" class="translation"></div>
-    <div id="learnRef" class="ref"></div>
-  </div>
+<div id="unlockMessage" class="unlock-message"></div>
 
+<div class="counter" id="learnCounter"></div>
+
+<div id="learnCategoryTitle" class="category-title"></div>
+
+<div
+  id="learnWord"
+  class="arabic-word"
+  onclick="toggleMeaning('learn')">
+</div>
+
+<div
+  id="learnMeaning"
+  class="meaning hidden">
+</div>
+
+<button
+  class="example-btn"
+  onclick="toggleExample('learn',event)">
+  📖 উদাহরণ দেখুন
+</button>
+
+<div id="learnExample" class="example-box">
+
+<div id="learnExampleArabic" class="example-arabic"></div>
+
+<div id="learnExampleBangla" class="example-bangla"></div>
+
+<div id="learnReference" class="reference"></div>
+
+</div>
+
+<div class="actions">
+
+<button
+  class="learned-btn"
+  onclick="learnCurrent()">
+  ✓ মুখস্থ হয়েছে
+</button>
+
+<button
+  class="study-btn"
+  onclick="studyCurrent()">
+  📚 পড়তে হবে
+</button>
+
+</div>
+
+</div>
 </section>
 
 
@@ -408,127 +516,52 @@ button{
 
 <section id="practice" class="section">
 
-  <div id="practiceHome">
+<div class="card">
 
-    <div class="card">
-      <h2>🎯 Practice</h2>
-      <p>যে ধরনের প্রশ্নে অনুশীলন করতে চাও সেটি বেছে নাও।</p>
-    </div>
+<div class="category-title">
+  📝 আগে পড়া শব্দ দিয়ে Practice
+</div>
 
-    <div class="practice-menu">
+<div id="practiceAvailable" class="unlock-message"></div>
 
-      <div class="practice-mode" onclick="startPractice('arToBnMCQ')">
-        <strong>আরবি → বাংলা</strong>
-        <span>সঠিক অর্থ বেছে নাও</span>
-      </div>
+<div class="modes">
 
-      <div class="practice-mode" onclick="startPractice('bnToArMCQ')">
-        <strong>বাংলা → আরবি</strong>
-        <span>সঠিক আরবি শব্দ বেছে নাও</span>
-      </div>
+<button id="mode1" class="active" onclick="setMode(1)">
+আরবি → বাংলা
+</button>
 
-      <div class="practice-mode" onclick="startPractice('bnToArWrite')">
-        <strong>বাংলা → আরবি লিখুন</strong>
-        <span>নিজে আরবি লিখতে হবে</span>
-      </div>
+<button id="mode2" onclick="setMode(2)">
+বাংলা → আরবি
+</button>
 
-      <div class="practice-mode" onclick="startPractice('arToBnWrite')">
-        <strong>আরবি → বাংলা লিখুন</strong>
-        <span>নিজে বাংলা অর্থ লিখতে হবে</span>
-      </div>
+<button id="mode3" onclick="setMode(3)">
+বাংলা লিখুন
+</button>
 
-    </div>
+<button id="mode4" onclick="setMode(4)">
+আরবি লিখুন
+</button>
 
-  </div>
+</div>
 
+<div class="practice-count" id="practiceCount"></div>
 
-  <div id="practiceQuiz" style="display:none;">
+<div id="questionLabel" class="question-label"></div>
 
-    <div class="card">
+<div id="practiceQuestion"></div>
 
-      <button class="secondary" onclick="practiceHome()">
-        ← Practice Menu
-      </button>
+<div id="answerArea"></div>
 
-      <div id="questionNumber" class="question-number"></div>
+<div id="feedback" class="feedback"></div>
 
-      <div id="questionArea"></div>
+<button
+id="nextPractice"
+class="next-btn"
+onclick="nextPractice()">
+পরের প্রশ্ন →
+</button>
 
-      <div id="options" class="options"></div>
-
-      <div id="answerArea"></div>
-
-      <div id="feedback" class="feedback"></div>
-
-      <button id="nextQuestion" class="primary" style="width:100%;display:none;" onclick="nextPracticeQuestion()">
-        পরবর্তী প্রশ্ন →
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div id="practiceResult" style="display:none;">
-
-    <div class="card practiceResult">
-
-      <h2>🎉 Practice শেষ</h2>
-
-      <div id="practiceScore" class="score"></div>
-
-      <div id="practiceResultText"></div>
-
-      <button class="primary" style="width:100%;margin-top:15px;" onclick="practiceHome()">
-        Practice Menu
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= PROGRESS ================= -->
-
-<section id="progress" class="section">
-
-  <div class="card">
-    <h2>📊 Progress</h2>
-    <p>তোমার শেখার অগ্রগতি</p>
-  </div>
-
-  <div class="stats">
-
-    <div class="stat">
-      <strong id="progressLearned">0</strong>
-      মুখস্থ
-    </div>
-
-    <div class="stat">
-      <strong id="progressStudy">0</strong>
-      পড়তে হবে
-    </div>
-
-    <div class="stat">
-      <strong id="progressAccuracy">0%</strong>
-      Practice Accuracy
-    </div>
-
-    <div class="stat">
-      <strong id="progressRemaining">20</strong>
-      বাকি
-    </div>
-
-  </div>
-
-  <div class="card">
-    <button class="reset" onclick="resetProgress()">
-      Reset Progress
-    </button>
-  </div>
-
+</div>
 </section>
 
 
@@ -536,411 +569,1156 @@ button{
 
 <section id="review" class="section">
 
-  <div class="card">
-    <h2>📖 Review</h2>
-    <p>যে শব্দগুলো আবার পড়তে হবে</p>
-  </div>
+<div class="card">
 
-  <div id="reviewList"></div>
+<div class="counter" id="reviewCounter"></div>
+
+<div id="reviewWord"
+class="arabic-word"
+onclick="toggleMeaning('review')">
+</div>
+
+<div id="reviewMeaning"
+class="meaning hidden">
+</div>
+
+<button
+class="example-btn"
+onclick="toggleExample('review',event)">
+📖 উদাহরণ দেখুন
+</button>
+
+<div id="reviewExample" class="example-box">
+
+<div id="reviewExampleArabic" class="example-arabic"></div>
+
+<div id="reviewExampleBangla" class="example-bangla"></div>
+
+<div id="reviewReference" class="reference"></div>
+
+</div>
+
+<div class="actions">
+
+<button
+class="learned-btn"
+onclick="reviewToLearned()">
+✓ মুখস্থ হয়েছে
+</button>
+
+<button
+class="study-btn"
+onclick="reviewNext()">
+📚 আরও পড়ব
+</button>
+
+</div>
+
+<button
+class="back-btn"
+onclick="showSection('learn')">
+← Learn এ ফিরে যান
+</button>
+
+</div>
+</section>
+
+
+<!-- ================= LEARNED ================= -->
+
+<section id="learned" class="section">
+
+<div class="card">
+
+<div class="counter" id="learnedCounter"></div>
+
+<div id="learnedWord"
+class="arabic-word"
+onclick="toggleMeaning('learned')">
+</div>
+
+<div id="learnedMeaning"
+class="meaning hidden">
+</div>
+
+<button
+class="example-btn"
+onclick="toggleExample('learned',event)">
+📖 উদাহরণ দেখুন
+</button>
+
+<div id="learnedExample" class="example-box">
+
+<div id="learnedExampleArabic" class="example-arabic"></div>
+
+<div id="learnedExampleBangla" class="example-bangla"></div>
+
+<div id="learnedReference" class="reference"></div>
+
+</div>
+
+<div class="actions">
+
+<button
+class="learned-btn"
+onclick="learnedNext()">
+✓ পরের মুখস্থ শব্দ
+</button>
+
+<button
+class="study-btn"
+onclick="learnedToReview()">
+📚 আবার পড়তে হবে
+</button>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= PROGRESS ================= -->
+
+<section id="progress" class="section">
+
+<div class="stats">
+
+<div class="stat">
+<div id="learnedCount" class="stat-number">0</div>
+<div class="stat-label">মুখস্থ</div>
+</div>
+
+<div class="stat">
+<div id="reviewCount" class="stat-number">0</div>
+<div class="stat-label">পড়তে হবে</div>
+</div>
+
+<div class="stat">
+<div id="remainingCount" class="stat-number">0</div>
+<div class="stat-label">নতুন বাকি</div>
+</div>
+
+<div class="stat">
+<div id="accuracyCount" class="stat-number">0%</div>
+<div class="stat-label">Practice</div>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:15px">
+<div class="category-title">📚 Section Progress</div>
+<div id="progressCategories"></div>
+</div>
 
 </section>
 
-</main>
+</div>
 
 
 <script>
 
-/* ================= DATA ================= */
+/* =========================================================
+   PDF CATEGORY DATA
+   প্রথম অংশ PDF-এর ১৫০টি প্রাথমিক শব্দের structure অনুযায়ী
+========================================================= */
 
-const words = [
+const categories = [
 
 {
-ar:"اللَّهُ",
-meaning:"আল্লাহ",
-ayah:"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ",
-ref:"২:২৫৫",
-translation:"আল্লাহ, তিনি ছাড়া কোনো উপাস্য নেই।"
+ id:"one-letter",
+ title:"এক অক্ষর বিশিষ্ট শব্দ",
+ icon:"🔓",
+ words:[
+  ["أ","কী?"],
+  ["ب","সাথে / দ্বারা"],
+  ["ل","জন্য"],
+  ["ف","অতঃপর"],
+  ["ك","মতো"],
+  ["و","এবং"],
+  ["س","শীঘ্রই"],
+  ["كَ","তোমার / তোমাকে"],
+  ["هُ / ه","তার / তাকে"],
+  ["ي","আমার / আমাকে"]
+ ]
 },
 
 {
-ar:"رَبٌّ",
-meaning:"রব / প্রতিপালক",
-ayah:"الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
-ref:"১:২",
-translation:"সমস্ত প্রশংসা আল্লাহর, যিনি সকল জগতের রব।"
+ id:"pronouns",
+ title:"মূল সর্বনাম",
+ icon:"🔒",
+ words:[
+  ["هُوَ","সে"],
+  ["هُمْ","তারা"],
+  ["أَنْتَ","তুমি"],
+  ["أَنْتُمْ","তোমরা"],
+  ["أَنَا","আমি"],
+  ["نَحْنُ","আমরা"],
+  ["هِيَ","সে (স্ত্রী)"],
+  ["هُنَّ","তারা (স্ত্রী)"],
+  ["أَنْتِ","তুমি (স্ত্রী)"],
+  ["أَنْتُنَّ","তোমরা (স্ত্রী)"],
+  ["هُمَا","তারা দুজন"],
+  ["أَنْتُمَا","তোমরা দুজন"]
+ ]
 },
 
 {
-ar:"كِتَابٌ",
-meaning:"কিতাব / গ্রন্থ",
-ayah:"ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ",
-ref:"২:২",
-translation:"এটি সেই কিতাব, যাতে কোনো সন্দেহ নেই।"
+ id:"attached-pronouns",
+ title:"যুক্ত সর্বনাম",
+ icon:"🔒",
+ words:[
+  ["هُ","তাকে / তার"],
+  ["هُم","তাদের / তাদেরকে"],
+  ["كَ","তোমাকে / তোমার"],
+  ["كُمْ","তোমাদের / তোমাদেরকে"],
+  ["ي","আমাকে / আমার"],
+  ["نَا","আমাদের / আমাদেরকে"]
+ ]
 },
 
 {
-ar:"يَوْمٌ",
-meaning:"দিন",
-ayah:"مَالِكِ يَوْمِ الدِّينِ",
-ref:"১:৪",
-translation:"বিচার দিনের মালিক।"
+ id:"particles",
+ title:"অব্যয়",
+ icon:"🔒",
+ words:[
+  ["بِ","সাথে / দ্বারা / মধ্যে"],
+  ["عَنْ","সম্পর্কে / হতে"],
+  ["فِي","মধ্যে"],
+  ["كَ","মতো"],
+  ["مِنْ","হতে / থেকে"],
+  ["لِ","জন্য"],
+  ["إِلَى","দিকে"],
+  ["حَتَّى","পর্যন্ত"],
+  ["عَلَى","উপর"],
+  ["مَعَ","সাথে"],
+  ["وَ","এবং / কসম"]
+ ]
 },
 
 {
-ar:"نُورٌ",
-meaning:"আলো",
-ayah:"اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ",
-ref:"২৪:৩৫",
-translation:"আল্লাহ আসমানসমূহ ও জমিনের আলো।"
+ id:"ma-words",
+ title:"মা-যুক্ত শব্দ",
+ icon:"🔒",
+ words:[
+  ["بِمَا","যেহেতু / যা দ্বারা"],
+  ["عَمَّا","যা সম্পর্কে"],
+  ["فِيمَا","যার মধ্যে / যা বিষয়ে"],
+  ["كَمَا","যেমন / যেভাবে"],
+  ["مِمَّا","যা থেকে"],
+  ["لِمَا","যার জন্য"],
+  ["أَمَّا","আর / অতঃপর"],
+  ["إِمَّا","হয় / অথবা"],
+  ["أَنَّمَا","যে"],
+  ["إِنَّمَا","নিশ্চয়ই / কেবল"],
+  ["كَأَنَّمَا","যেন"],
+  ["كُلَّمَا","যখনই"]
+ ]
 },
 
 {
-ar:"قَلْبٌ",
-meaning:"হৃদয় / অন্তর",
-ayah:"وَنَطْبَعُ عَلَىٰ قُلُوبِهِمْ",
-ref:"৭:১০০",
-translation:"আমি তাদের অন্তরের উপর মোহর মেরে দিই।"
+ id:"yes-no",
+ title:"হ্যাঁ/না-বাচক",
+ icon:"🔒",
+ words:[
+  ["لَا","না / নয়"],
+  ["مَا","না / যা / কী"],
+  ["لَنْ","না (ভবিষ্যৎ)"],
+  ["لَمْ","না (অতীত)"],
+  ["لَا أَبَدًا","কখনোই না"],
+  ["لَيْسَ","নয়"],
+  ["إِلَّا","ব্যতীত"],
+  ["غَيْرَ","ব্যতীত / অন্য"],
+  ["دُونَ","ব্যতীত"],
+  ["بَلَى","হ্যাঁ / অবশ্যই"],
+  ["نَعَمْ","হ্যাঁ"]
+ ]
 },
 
 {
-ar:"مَاءٌ",
-meaning:"পানি",
-ayah:"وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ",
-ref:"২১:৩০",
-translation:"আমি পানি থেকে প্রত্যেক জীবন্ত জিনিস সৃষ্টি করেছি।"
+ id:"conditional",
+ title:"শর্তবাচক",
+ icon:"🔒",
+ words:[
+  ["إِنَّ","নিশ্চয়ই"],
+  ["أَنَّ","যে"],
+  ["أَنْ","যে / যাতে"],
+  ["إِنْ","যদি"],
+  ["لَوْ","যদি"],
+  ["كَأَنَّ","যেন"],
+  ["لَكِنْ","কিন্তু"],
+  ["لَعَلَّ","সম্ভবত / হয়তো"],
+  ["عَسَى","হয়তো"],
+  ["لَمَّا","যখন / এখনও নয়"],
+  ["إِذَا","যখন"],
+  ["يَا","হে"],
+  ["أَيُّهَا","হে"]
+ ]
 },
 
 {
-ar:"أَرْضٌ",
-meaning:"পৃথিবী / জমিন",
-ayah:"الْأَرْضَ",
-ref:"২১:৩০",
-translation:"পৃথিবী / জমিন।"
+ id:"demonstrative",
+ title:"নির্দেশবাচক",
+ icon:"🔒",
+ words:[
+  ["هَذَا","এটি (পুং)"],
+  ["هَذِهِ","এটি (স্ত্রী)"],
+  ["ذَلِكَ","ওটি (পুং)"],
+  ["تِلْكَ","ওটি (স্ত্রী)"],
+  ["هَؤُلَاءِ","এরা / এগুলো"],
+  ["أُولَئِكَ","ওরা / ওগুলো"],
+  ["الَّذِي","যে (পুং)"],
+  ["الَّتِي","যে (স্ত্রী)"],
+  ["الَّذِينَ","যারা"],
+  ["مَنْ","যে / যারা"],
+  ["هُنَالِكَ","সেখানে"]
+ ]
 },
 
 {
-ar:"سَمَاءٌ",
-meaning:"আকাশ",
-ayah:"خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ",
-ref:"৬:১",
-translation:"তিনি আসমানসমূহ ও জমিন সৃষ্টি করেছেন।"
+ id:"directions",
+ title:"দিক-নির্দেশক",
+ icon:"🔒",
+ words:[
+  ["فَوْقَ","উপরে"],
+  ["تَحْتَ","নিচে"],
+  ["بَيْنَ يَدَيْ","সামনে"],
+  ["خَلْفَ","পেছনে"],
+  ["أَمَامَ","সামনে"],
+  ["وَرَاءَ","পেছনে"],
+  ["أَيْمَانَ","ডান দিকে"],
+  ["شَمَائِلَ","বাম দিকে"],
+  ["بَيْنَ","মধ্যে"],
+  ["حَوْلَ","চারদিকে"],
+  ["حَيْثُ","যেখানে"],
+  ["أَيْنَمَا","যেখানেই"]
+ ]
 },
 
 {
-ar:"صِرَاطٌ",
-meaning:"পথ",
-ayah:"اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
-ref:"১:৬",
-translation:"আমাদের সরল পথ দেখান।"
+ id:"questions",
+ title:"প্রশ্নবাচক",
+ icon:"🔒",
+ words:[
+  ["مَا","কি?"],
+  ["مَنْ","কে?"],
+  ["مَتَى","কখন?"],
+  ["أَيْنَ","কোথায়?"],
+  ["كَيْفَ","কেমন / কীভাবে?"],
+  ["كَمْ","কত?"],
+  ["أَيُّ","কোনটি?"],
+  ["أَنَّى","কোথা থেকে? / কেন?"],
+  ["هَلْ","কি?"],
+  ["مَاذَا","কী?"]
+ ]
 },
 
 {
-ar:"حَقٌّ",
-meaning:"সত্য",
-ayah:"وَقُلْ جَاءَ الْحَقُّ وَزَهَقَ الْبَاطِلُ",
-ref:"১৭:৮১",
-translation:"বলুন, সত্য এসেছে এবং বাতিল বিলুপ্ত হয়েছে।"
+ id:"ownership",
+ title:"মালিকানা-সম্পর্কিত",
+ icon:"🔒",
+ words:[
+  ["ذُو","অধিকারী / মালিক"],
+  ["ذِي","অধিকারী / মালিক"],
+  ["ذَات","অধিকারী (স্ত্রী)"],
+  ["أُولُو","অধিকারীগণ"],
+  ["أُولِي","অধিকারীগণ"],
+  ["أَهْل","লোকজন / অধিবাসী"],
+  ["آل","পরিবার / সম্প্রদায়"],
+  ["نِعْمَ","উত্তম"],
+  ["بِئْسَ","মন্দ"],
+  ["بِئْسَمَا","কতই না মন্দ"],
+  ["مِثْل","অনুরূপ"],
+  ["مَثَل","দৃষ্টান্ত"],
+  ["مِمَّنْ","যাদের থেকে"]
+ ]
 },
 
 {
-ar:"عِلْمٌ",
-meaning:"জ্ঞান",
-ayah:"وَقُلْ رَبِّ زِدْنِي عِلْمًا",
-ref:"২০:১১৪",
-translation:"বলুন, হে আমার রব, আমার জ্ঞান বৃদ্ধি করুন।"
+ id:"important",
+ title:"গুরুত্বপূর্ণ শব্দ",
+ icon:"🔒",
+ words:[
+  ["قَبْلَ","পূর্বে"],
+  ["بَعْدَ","পরে"],
+  ["حِين","সময় / কাল"],
+  ["إِذْ","যখন (অতীত)"],
+  ["إِذَا","যখন (ভবিষ্যৎ)"],
+  ["ثُمَّ","তারপর"],
+  ["فَ","অতঃপর / সুতরাং"],
+  ["بَلْ","বরং / কিন্তু"],
+  ["عِنْدَ","কাছে / সাথে"],
+  ["لِئَلَّا","যাতে না"],
+  ["قَدْ","অবশ্যই / হয়েছে"],
+  ["لَقَدْ","নিশ্চয়ই"],
+  ["سَ","শীঘ্রই"],
+  ["سَوْفَ","শীঘ্রই"],
+  ["لَ","নিশ্চয়ই"],
+  ["لِ","আদেশ অর্থে"],
+  ["ال","উক্ত / the"],
+  ["أَمْ","অথবা"],
+  ["أَوْ","অথবা"],
+  ["بَعْض","কিছু"],
+  ["كُلّ","প্রত্যেক"]
+ ]
 },
 
 {
-ar:"رَحْمَةٌ",
-meaning:"দয়া / রহমত",
-ayah:"وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ",
-ref:"৭:১৫৬",
-translation:"আমার রহমত সবকিছুকে পরিব্যাপ্ত করেছে।"
-},
+ id:"verbs",
+ title:"২০০টি ক্রিয়াপদ",
+ icon:"🔒",
+ words:[
+  ["قَالَ","বলা"],
+  ["كَانَ","হওয়া"],
+  ["آمَنَ","বিশ্বাস করা"],
+  ["عَلِمَ","জানা"],
+  ["جَعَلَ","করা / বানানো"],
+  ["كَفَرَ","অস্বীকার করা"],
+  ["جَاءَ","আসা"],
+  ["عَمِلَ","কাজ করা"],
+  ["آتَى","দেওয়া"],
+  ["رَأَى","দেখা"],
+  ["أَتَى","আসা / নিয়ে আসা"],
+  ["شَاءَ","ইচ্ছা করা"],
+  ["خَلَقَ","সৃষ্টি করা"],
+  ["أَنْزَلَ","নাজিল করা"],
+  ["دَعَا","ডাকা / আহ্বান করা"],
+  ["عَبَدَ","ইবাদত করা"],
+  ["أَرَادَ","ইচ্ছা করা"],
+  ["أَخَذَ","গ্রহণ করা"],
+  ["أَرْسَلَ","প্রেরণ করা"],
+  ["وَجَدَ","পাওয়া"],
+  ["عَرَفَ","চেনা / জানা"],
+  ["سَمِعَ","শোনা"],
+  ["دَخَلَ","প্রবেশ করা"],
+  ["خَرَجَ","বের হওয়া"],
+  ["أَكَلَ","খাওয়া"],
+  ["شَرِبَ","পান করা"],
+  ["كَتَبَ","লেখা"],
+  ["قَضَى","ফয়সালা করা"],
+  ["غَفَرَ","ক্ষমা করা"],
+  ["هَدَى","পথ দেখানো"]
+ ]
 
-{
-ar:"مَغْفِرَةٌ",
-meaning:"ক্ষমা",
-ayah:"وَاللَّهُ غَفُورٌ رَحِيمٌ",
-ref:"২:১৭৩",
-translation:"আর আল্লাহ ক্ষমাশীল, পরম দয়ালু।"
-},
-
-{
-ar:"صَلَاةٌ",
-meaning:"সালাত / নামাজ",
-ayah:"وَأَقِيمُوا الصَّلَاةَ",
-ref:"২:৪৩",
-translation:"তোমরা সালাত কায়েম করো।"
-},
-
-{
-ar:"زَكَاةٌ",
-meaning:"যাকাত",
-ayah:"وَآتُوا الزَّكَاةَ",
-ref:"২:৪৩",
-translation:"এবং যাকাত দাও।"
-},
-
-{
-ar:"جَنَّةٌ",
-meaning:"জান্নাত",
-ayah:"وَسَارِعُوا إِلَىٰ مَغْفِرَةٍ مِنْ رَبِّكُمْ وَجَنَّةٍ",
-ref:"৩:১৩৩",
-translation:"তোমরা তোমাদের রবের ক্ষমা ও জান্নাতের দিকে দ্রুত এগিয়ে যাও।"
-},
-
-{
-ar:"نَارٌ",
-meaning:"আগুন",
-ayah:"فَاتَّقُوا النَّارَ",
-ref:"২:২৪",
-translation:"অতএব আগুন থেকে বাঁচো।"
-},
-
-{
-ar:"لَيْلٌ",
-meaning:"রাত",
-ayah:"وَجَعَلْنَا اللَّيْلَ لِبَاسًا",
-ref:"৭৮:১০",
-translation:"আমি রাতকে করেছি আবরণ।"
-},
-
-{
-ar:"نَهَارٌ",
-meaning:"দিন / দিবাভাগ",
-ayah:"وَجَعَلْنَا النَّهَارَ مَعَاشًا",
-ref:"৭৮:১১",
-translation:"আমি দিনকে করেছি জীবিকার সময়।"
 }
 
 ];
 
 
-/* ================= STORAGE ================= */
+/* =========================================================
+   WORD OBJECT তৈরি
+========================================================= */
 
-let learned = new Set(
-  JSON.parse(localStorage.getItem("learnedWords") || "[]")
-);
+let words = [];
 
-let study = new Set(
-  JSON.parse(localStorage.getItem("studyWords") || "[]")
-);
+categories.forEach((cat,catIndex)=>{
 
-let attempts = Number(
-  localStorage.getItem("practiceAttempts") || 0
-);
+  cat.words.forEach((item,wordIndex)=>{
 
-let rightAnswers = Number(
-  localStorage.getItem("practiceRight") || 0
-);
+    words.push({
+      id:cat.id+"-"+wordIndex,
+      arabic:item[0],
+      meaning:item[1],
+      category:catIndex,
+      categoryId:cat.id,
+      categoryTitle:cat.title,
+      example:"",
+      translation:"",
+      surah:"",
+      ayah:""
+    });
+
+  });
+
+});
 
 
-/* ================= LEARN ================= */
+/* =========================================================
+   STORAGE
+========================================================= */
 
-let currentWordIndex = null;
-let cardFlipped = false;
+let learnedWords =
+JSON.parse(localStorage.getItem("learnedWords") || "[]");
+
+let studyWords =
+JSON.parse(localStorage.getItem("studyWords") || "[]");
+
+let completedCategories =
+JSON.parse(localStorage.getItem("completedCategories") || "[]");
+
+let practiceAttempts =
+Number(localStorage.getItem("practiceAttempts") || 0);
+
+let practiceRight =
+Number(localStorage.getItem("practiceRight") || 0);
+
+let selectedCategory =
+Number(localStorage.getItem("selectedCategory") || 0);
 
 
-function getNextNewWord(){
+/* =========================================================
+   CURRENT
+========================================================= */
 
-  const available = words
-    .map((_,index)=>index)
-    .filter(index =>
-      !learned.has(index) &&
-      !study.has(index)
-    );
+let learnIndex=-1;
+let reviewPosition=0;
+let learnedPosition=0;
 
-  if(available.length === 0){
-    return null;
+let meaningState={
+  learn:false,
+  review:false,
+  learned:false
+};
+
+let exampleState={
+  learn:false,
+  review:false,
+  learned:false
+};
+
+
+/* =========================================================
+   CATEGORY SYSTEM
+========================================================= */
+
+function categoryWordIndexes(categoryIndex){
+
+  return words
+    .map((w,i)=>w.category===categoryIndex ? i : -1)
+    .filter(i=>i!==-1);
+
+}
+
+
+function isCategoryUnlocked(index){
+
+  if(index===0) return true;
+
+  return completedCategories.includes(index-1);
+}
+
+
+function isCategoryComplete(index){
+
+  const indexes=categoryWordIndexes(index);
+
+  if(indexes.length===0) return false;
+
+  return indexes.every(i =>
+    learnedWords.includes(i) ||
+    studyWords.includes(i)
+  );
+
+}
+
+
+function updateCategoryCompletion(){
+
+  for(let i=0;i<categories.length;i++){
+
+    if(isCategoryComplete(i)){
+
+      if(!completedCategories.includes(i)){
+        completedCategories.push(i);
+      }
+
+    }else{
+
+      /*
+       * শুধু পরবর্তী unlock-এর জন্য completion দরকার।
+       * আগের completed category পুনরায় খুলে রাখা হবে।
+       */
+    }
+
   }
 
-  return available[Math.floor(Math.random()*available.length)];
+  localStorage.setItem(
+    "completedCategories",
+    JSON.stringify(completedCategories)
+  );
 }
 
 
-function loadLearn(index=null){
+function renderCategories(){
 
-  if(index === null){
-    index = getNextNewWord();
-  }
+  updateCategoryCompletion();
 
-  currentWordIndex = index;
+  const box=document.getElementById("categoryList");
 
-  if(index === null){
+  box.innerHTML="";
 
-    document.getElementById("learnArabic").textContent =
-      "সব শব্দ শেষ 🎉";
+  categories.forEach((cat,index)=>{
 
-    document.getElementById("learnMeaning").style.display="none";
+    const unlocked=isCategoryUnlocked(index);
+    const complete=isCategoryComplete(index);
 
-    document.getElementById("learnCount").textContent =
-      "অভিনন্দন!";
+    const btn=document.createElement("button");
 
-    document.getElementById("learnAyah").textContent="";
-    document.getElementById("learnTranslation").textContent="";
-    document.getElementById("learnRef").textContent="";
+    btn.className="category";
 
-    return;
-  }
+    if(unlocked){
+      btn.classList.add("unlocked");
+    }else{
+      btn.classList.add("locked");
+    }
 
-  cardFlipped=false;
+    if(index===selectedCategory && unlocked){
+      btn.classList.add("current");
+    }
 
-  const word=words[index];
+    const indexes=categoryWordIndexes(index);
 
-  document.getElementById("learnArabic").textContent=word.ar;
+    const done=indexes.filter(i =>
+      learnedWords.includes(i) ||
+      studyWords.includes(i)
+    ).length;
 
-  document.getElementById("learnMeaning").textContent=word.meaning;
+    let icon;
 
-  document.getElementById("learnMeaning").style.display="none";
+    if(complete){
+      icon="✅";
+    }else if(unlocked){
+      icon="🔓";
+    }else{
+      icon="🔒";
+    }
 
-  document.getElementById("learnCount").textContent =
-    `${learned.size} / ${words.length} মুখস্থ`;
-
-  document.getElementById("learnAyah").textContent=word.ayah;
-  document.getElementById("learnTranslation").textContent=word.translation;
-  document.getElementById("learnRef").textContent=word.ref;
-}
-
-
-function flipCard(){
-
-  if(currentWordIndex === null) return;
-
-  cardFlipped=!cardFlipped;
-
-  document.getElementById("learnArabic").style.display =
-    cardFlipped ? "none" : "block";
-
-  document.getElementById("learnMeaning").style.display =
-    cardFlipped ? "block" : "none";
-}
-
-
-function markMastered(){
-
-  if(currentWordIndex===null) return;
-
-  learned.add(currentWordIndex);
-
-  study.delete(currentWordIndex);
-
-  saveData();
-
-  loadLearn();
-
-  updateProgress();
-}
-
-
-function markStudy(){
-
-  if(currentWordIndex===null) return;
-
-  study.add(currentWordIndex);
-
-  learned.delete(currentWordIndex);
-
-  saveData();
-
-  loadLearn();
-
-  updateProgress();
-}
-
-
-/* ================= REVIEW ================= */
-
-function renderReview(){
-
-  const list=document.getElementById("reviewList");
-
-  list.innerHTML="";
-
-  const reviewWords=[...study];
-
-  if(reviewWords.length===0){
-
-    list.innerHTML=
-      `<div class="card empty">
-        🎉 এখন কোনো শব্দ Review-তে নেই।
-      </div>`;
-
-    return;
-  }
-
-  reviewWords.forEach(index=>{
-
-    const word=words[index];
-
-    const div=document.createElement("div");
-
-    div.className="reviewItem";
-
-    div.innerHTML=`
-
-      <div>
-        <div class="reviewArabic">${word.ar}</div>
-        <div class="reviewMeaning">${word.meaning}</div>
-      </div>
-
-      <button class="primary" onclick="reviewWord(${index})">
-        পড়ুন
-      </button>
-
+    btn.innerHTML=`
+      <span>${icon} ${cat.title}</span>
+      <span class="category-progress">${done}/${indexes.length}</span>
     `;
 
-    list.appendChild(div);
+    if(unlocked){
+
+      btn.onclick=()=>{
+
+        selectedCategory=index;
+
+        localStorage.setItem(
+          "selectedCategory",
+          selectedCategory
+        );
+
+        renderCategories();
+        loadNewWord();
+
+      };
+
+    }else{
+
+      btn.onclick=()=>{
+
+        document.getElementById("unlockMessage").textContent=
+          "🔒 আগে আগের Section-এর সব শব্দ শেষ করুন। তারপর এই Section unlock হবে।";
+
+      };
+
+    }
+
+    box.appendChild(btn);
 
   });
 
 }
 
 
-function reviewWord(index){
+/* =========================================================
+   NAV
+========================================================= */
 
-  showSection("learn",
-    document.querySelectorAll(".navBtn")[0]
-  );
+function showSection(name){
 
-  loadLearn(index);
+  document.querySelectorAll(".section")
+  .forEach(s=>s.classList.remove("active"));
+
+  document.getElementById(name).classList.add("active");
+
+  document.querySelectorAll("nav button")
+  .forEach(b=>b.classList.remove("active"));
+
+  const navMap={
+    learn:"navLearn",
+    practice:"navPractice",
+    review:"navReview",
+    learned:"navLearned",
+    progress:"navProgress"
+  };
+
+  document.getElementById(navMap[name]).classList.add("active");
+
+  if(name==="learn"){
+    renderCategories();
+    loadNewWord();
+  }
+
+  if(name==="practice"){
+    startPractice();
+  }
+
+  if(name==="review"){
+    loadReviewWord();
+  }
+
+  if(name==="learned"){
+    loadLearnedWord();
+  }
+
+  if(name==="progress"){
+    updateProgress();
+  }
 }
 
 
-/* ================= PRACTICE ================= */
+/* =========================================================
+   CARD
+========================================================= */
 
-let practiceMode=null;
+function fillCard(type,index){
+
+  const w=words[index];
+
+  meaningState[type]=false;
+  exampleState[type]=false;
+
+  document.getElementById(type+"Word").textContent=w.arabic;
+
+  document.getElementById(type+"Meaning").textContent=w.meaning;
+
+  document.getElementById(type+"Meaning")
+  .classList.add("hidden");
+
+  document.getElementById(type+"ExampleArabic").textContent=
+    w.example || "";
+
+  document.getElementById(type+"ExampleBangla").textContent=
+    w.translation || "";
+
+  document.getElementById(type+"Reference").textContent=
+    w.surah && w.ayah
+      ? w.surah+" — "+w.ayah
+      : "";
+
+  document.getElementById(type+"Example")
+  .classList.remove("show");
+}
+
+
+function toggleMeaning(type){
+
+  meaningState[type]=!meaningState[type];
+
+  const el=document.getElementById(type+"Meaning");
+
+  if(meaningState[type])
+    el.classList.remove("hidden");
+  else
+    el.classList.add("hidden");
+}
+
+
+function toggleExample(type,event){
+
+  event.stopPropagation();
+
+  exampleState[type]=!exampleState[type];
+
+  const box=document.getElementById(type+"Example");
+
+  if(exampleState[type])
+    box.classList.add("show");
+  else
+    box.classList.remove("show");
+}
+
+
+/* =========================================================
+   LEARN
+========================================================= */
+
+function getCategoryNewWords(categoryIndex){
+
+  return categoryWordIndexes(categoryIndex)
+    .filter(i =>
+      !learnedWords.includes(i) &&
+      !studyWords.includes(i)
+    );
+
+}
+
+
+function loadNewWord(){
+
+  renderCategories();
+
+  const cat=categories[selectedCategory];
+
+  if(!cat) return;
+
+  if(!isCategoryUnlocked(selectedCategory)){
+
+    selectedCategory=0;
+
+    localStorage.setItem(
+      "selectedCategory",
+      selectedCategory
+    );
+
+    loadNewWord();
+
+    return;
+  }
+
+  const available=
+    getCategoryNewWords(selectedCategory);
+
+  document.getElementById("learnCategoryTitle").textContent=
+    cat.title;
+
+  if(available.length===0){
+
+    document.getElementById("learnCounter").textContent=
+      "🎉 এই Section শেষ";
+
+    document.getElementById("learnWord").textContent=
+      "مَاشَاءَ اللَّهُ";
+
+    document.getElementById("learnMeaning").textContent=
+      "এই Section-এর সব শব্দ শেষ হয়েছে।";
+
+    document.getElementById("learnMeaning")
+    .classList.remove("hidden");
+
+    document.getElementById("learnExample")
+    .classList.remove("show");
+
+    const next=selectedCategory+1;
+
+    if(next<categories.length){
+
+      if(isCategoryUnlocked(next)){
+
+        document.getElementById("unlockMessage").textContent=
+          "🎉 পরের Section unlock হয়েছে!";
+
+      }else{
+
+        document.getElementById("unlockMessage").textContent=
+          "✓ Section সম্পূর্ণ। পরের Section unlock করার জন্য completion save করা হয়েছে।";
+
+      }
+
+    }else{
+
+      document.getElementById("unlockMessage").textContent=
+        "🏆 সব Section সম্পূর্ণ!";
+
+    }
+
+    return;
+  }
+
+  learnIndex=available[0];
+
+  fillCard("learn",learnIndex);
+
+  document.getElementById("learnCounter").textContent=
+    "নতুন শব্দ বাকি: "+available.length;
+
+  document.getElementById("unlockMessage").textContent=
+    "📖 এখন পড়ছেন: "+cat.title;
+}
+
+
+function learnCurrent(){
+
+  if(learnIndex<0) return;
+
+  if(!learnedWords.includes(learnIndex)){
+    learnedWords.push(learnIndex);
+  }
+
+  studyWords=
+    studyWords.filter(i=>i!==learnIndex);
+
+  save();
+
+  checkAndUnlock();
+
+  loadNewWord();
+}
+
+
+function studyCurrent(){
+
+  if(learnIndex<0) return;
+
+  if(!studyWords.includes(learnIndex)){
+    studyWords.push(learnIndex);
+  }
+
+  learnedWords=
+    learnedWords.filter(i=>i!==learnIndex);
+
+  save();
+
+  checkAndUnlock();
+
+  loadNewWord();
+}
+
+
+function checkAndUnlock(){
+
+  updateCategoryCompletion();
+
+  const next=selectedCategory+1;
+
+  if(next<categories.length &&
+     isCategoryUnlocked(next)){
+
+    document.getElementById("unlockMessage").textContent=
+      "🎉 "+categories[next].title+" unlock হয়েছে!";
+  }
+}
+
+
+/* =========================================================
+   REVIEW
+========================================================= */
+
+function loadReviewWord(){
+
+  if(studyWords.length===0){
+
+    document.getElementById("reviewCounter").textContent=
+      "Review খালি";
+
+    document.getElementById("reviewWord").textContent="📚";
+
+    document.getElementById("reviewMeaning").textContent=
+      "এখন কোনো পড়তে হবে শব্দ নেই";
+
+    document.getElementById("reviewMeaning")
+    .classList.remove("hidden");
+
+    document.getElementById("reviewExample")
+    .classList.remove("show");
+
+    return;
+  }
+
+  if(reviewPosition>=studyWords.length)
+    reviewPosition=0;
+
+  const index=studyWords[reviewPosition];
+
+  fillCard("review",index);
+
+  document.getElementById("reviewCounter").textContent=
+    "Review "+(reviewPosition+1)+" / "+studyWords.length;
+}
+
+
+function reviewToLearned(){
+
+  if(studyWords.length===0) return;
+
+  const index=studyWords[reviewPosition];
+
+  if(!learnedWords.includes(index))
+    learnedWords.push(index);
+
+  studyWords=
+    studyWords.filter(i=>i!==index);
+
+  save();
+
+  checkAndUnlock();
+
+  if(reviewPosition>=studyWords.length)
+    reviewPosition=0;
+
+  loadReviewWord();
+}
+
+
+function reviewNext(){
+
+  if(studyWords.length===0) return;
+
+  reviewPosition++;
+
+  if(reviewPosition>=studyWords.length)
+    reviewPosition=0;
+
+  loadReviewWord();
+}
+
+
+/* =========================================================
+   LEARNED
+========================================================= */
+
+function loadLearnedWord(){
+
+  if(learnedWords.length===0){
+
+    document.getElementById("learnedCounter").textContent=
+      "মুখস্থ খালি";
+
+    document.getElementById("learnedWord").textContent="✓";
+
+    document.getElementById("learnedMeaning").textContent=
+      "এখনো কোনো শব্দ মুখস্থ করা হয়নি";
+
+    document.getElementById("learnedMeaning")
+    .classList.remove("hidden");
+
+    return;
+  }
+
+  if(learnedPosition>=learnedWords.length)
+    learnedPosition=0;
+
+  const index=learnedWords[learnedPosition];
+
+  fillCard("learned",index);
+
+  document.getElementById("learnedCounter").textContent=
+    "মুখস্থ "+(learnedPosition+1)+" / "+learnedWords.length;
+}
+
+
+function learnedNext(){
+
+  if(learnedWords.length===0) return;
+
+  learnedPosition++;
+
+  if(learnedPosition>=learnedWords.length)
+    learnedPosition=0;
+
+  loadLearnedWord();
+}
+
+
+function learnedToReview(){
+
+  if(learnedWords.length===0) return;
+
+  const index=learnedWords[learnedPosition];
+
+  learnedWords=
+    learnedWords.filter(i=>i!==index);
+
+  if(!studyWords.includes(index))
+    studyWords.push(index);
+
+  save();
+
+  loadLearnedWord();
+}
+
+
+/* =========================================================
+   PRACTICE
+========================================================= */
+
+let practiceMode=1;
 let practiceQuestions=[];
 let practiceIndex=0;
 let practiceScore=0;
-let questionAnswered=false;
+let answered=false;
 
 
-function practiceHome(){
+/*
+ * গুরুত্বপূর্ণ:
+ * Practice-এ সব words নয়।
+ * শুধু unlocked category-এর শব্দ আসবে।
+ */
 
-  document.getElementById("practiceHome").style.display="block";
-  document.getElementById("practiceQuiz").style.display="none";
-  document.getElementById("practiceResult").style.display="none";
+function getPracticeWords(){
 
-  practiceMode=null;
+  const result=[];
+
+  categories.forEach((cat,index)=>{
+
+    if(isCategoryUnlocked(index)){
+
+      categoryWordIndexes(index)
+      .forEach(wordIndex=>{
+
+        /*
+         * শব্দটি আগে পড়া হয়েছে কিনা:
+         * learned অথবা study list-এ থাকলে Practice-এ আসবে।
+         */
+
+        if(
+          learnedWords.includes(wordIndex) ||
+          studyWords.includes(wordIndex)
+        ){
+          result.push(words[wordIndex]);
+        }
+
+      });
+
+    }
+
+  });
+
+  return result;
 }
 
 
-function startPractice(mode){
+function setMode(mode){
 
   practiceMode=mode;
 
-  practiceQuestions=shuffle(
-    words.map((_,i)=>i)
-  ).slice(0,10);
+  document.querySelectorAll(".modes button")
+  .forEach(b=>b.classList.remove("active"));
+
+  document.getElementById("mode"+mode)
+  .classList.add("active");
+
+  startPractice();
+}
+
+
+function startPractice(){
+
+  const pool=getPracticeWords();
+
+  document.getElementById("practiceAvailable").textContent=
+    "📚 Practice-এর জন্য এখন "+pool.length+"টি পড়া শব্দ আছে।";
+
+  if(pool.length===0){
+
+    practiceQuestions=[];
+
+    document.getElementById("practiceCount").textContent="";
+
+    document.getElementById("questionLabel").textContent=
+      "আগে Learn section-এর কিছু শব্দ পড়ুন।";
+
+    document.getElementById("practiceQuestion").textContent=
+      "📖";
+
+    document.getElementById("answerArea").innerHTML="";
+
+    document.getElementById("feedback").textContent=
+      "শব্দ পড়লে সেগুলো এখানে Practice-এ আসবে।";
+
+    document.getElementById("nextPractice").style.display="none";
+
+    return;
+  }
+
+  practiceQuestions=
+    [...pool]
+    .sort(()=>Math.random()-.5)
+    .slice(0,Math.min(10,pool.length));
 
   practiceIndex=0;
   practiceScore=0;
-  questionAnswered=false;
-
-  document.getElementById("practiceHome").style.display="none";
-  document.getElementById("practiceQuiz").style.display="block";
-  document.getElementById("practiceResult").style.display="none";
 
   showPracticeQuestion();
 }
@@ -948,296 +1726,248 @@ function startPractice(mode){
 
 function showPracticeQuestion(){
 
-  questionAnswered=false;
+  if(practiceIndex>=practiceQuestions.length){
 
-  const index=practiceQuestions[practiceIndex];
-
-  const word=words[index];
-
-  document.getElementById("questionNumber").textContent =
-    `প্রশ্ন ${practiceIndex+1} / ${practiceQuestions.length}`;
-
-  document.getElementById("feedback").textContent="";
-
-  document.getElementById("nextQuestion").style.display="none";
-
-  document.getElementById("options").innerHTML="";
-  document.getElementById("answerArea").innerHTML="";
-
-  let area=document.getElementById("questionArea");
-
-
-  /* Arabic -> Bangla MCQ */
-
-  if(practiceMode==="arToBnMCQ"){
-
-    area.innerHTML=`
-      <div class="question-arabic">${word.ar}</div>
-      <div style="text-align:center;margin-bottom:15px;">
-        এর অর্থ কোনটি?
-      </div>
-    `;
-
-    const options=createOptions(index,"meaning");
-
-    options.forEach(optionIndex=>{
-      addOption(words[optionIndex].meaning,optionIndex,index);
-    });
-
-  }
-
-
-  /* Bangla -> Arabic MCQ */
-
-  else if(practiceMode==="bnToArMCQ"){
-
-    area.innerHTML=`
-      <div class="question-bangla">${word.meaning}</div>
-      <div style="text-align:center;margin-bottom:15px;">
-        সঠিক আরবি শব্দ কোনটি?
-      </div>
-    `;
-
-    const options=createOptions(index,"ar");
-
-    options.forEach(optionIndex=>{
-      addOption(words[optionIndex].ar,optionIndex,index);
-    });
-
-  }
-
-
-  /* Bangla -> Arabic Write */
-
-  else if(practiceMode==="bnToArWrite"){
-
-    area.innerHTML=`
-      <div class="question-bangla">${word.meaning}</div>
-      <div style="text-align:center;margin-bottom:15px;">
-        আরবি শব্দটি লিখুন
-      </div>
-    `;
-
-    document.getElementById("answerArea").innerHTML=`
-      <input
-        id="writeAnswer"
-        class="answerInput"
-        type="text"
-        dir="rtl"
-        placeholder="আরবি লিখুন"
-        autocomplete="off"
-      >
-
-      <button
-        class="primary"
-        style="width:100%;"
-        onclick="checkWrittenAnswer()"
-      >
-        উত্তর দিন
-      </button>
-    `;
-
-  }
-
-
-  /* Arabic -> Bangla Write */
-
-  else if(practiceMode==="arToBnWrite"){
-
-    area.innerHTML=`
-      <div class="question-arabic">${word.ar}</div>
-      <div style="text-align:center;margin-bottom:15px;">
-        বাংলা অর্থ লিখুন
-      </div>
-    `;
-
-    document.getElementById("answerArea").innerHTML=`
-      <input
-        id="writeAnswer"
-        class="answerInput"
-        type="text"
-        placeholder="বাংলা অর্থ লিখুন"
-        autocomplete="off"
-      >
-
-      <button
-        class="primary"
-        style="width:100%;"
-        onclick="checkWrittenAnswer()"
-      >
-        উত্তর দিন
-      </button>
-    `;
-
-  }
-
-}
-
-
-function createOptions(correctIndex,type){
-
-  const indexes=[correctIndex];
-
-  while(indexes.length<4){
-
-    const random=Math.floor(Math.random()*words.length);
-
-    if(!indexes.includes(random)){
-      indexes.push(random);
-    }
-
-  }
-
-  return shuffle(indexes);
-}
-
-
-function addOption(text,index,correctIndex){
-
-  const button=document.createElement("button");
-
-  button.className="option";
-
-  button.textContent=text;
-
-  button.onclick=()=>checkMCQ(index,correctIndex,button);
-
-  document.getElementById("options").appendChild(button);
-}
-
-
-function checkMCQ(selectedIndex,correctIndex,button){
-
-  if(questionAnswered) return;
-
-  questionAnswered=true;
-
-  attempts++;
-
-  if(selectedIndex===correctIndex){
-
-    rightAnswers++;
-
-    practiceScore++;
-
-    button.classList.add("correct");
-
-    document.getElementById("feedback").textContent=
-      "✅ সঠিক উত্তর!";
-
-  }else{
-
-    button.classList.add("wrong");
-
-    document.getElementById("feedback").textContent=
-      `❌ ভুল। সঠিক উত্তর: ${getCorrectAnswer(correctIndex)}`;
-
-    const all=document.querySelectorAll(".option");
-
-    all.forEach(btn=>{
-
-      if(btn.textContent===getCorrectAnswer(correctIndex)){
-        btn.classList.add("correct");
-      }
-
-    });
-
-  }
-
-  saveData();
-
-  document.getElementById("nextQuestion").style.display="block";
-
-}
-
-
-function getCorrectAnswer(index){
-
-  if(practiceMode==="arToBnMCQ"){
-    return words[index].meaning;
-  }
-
-  return words[index].ar;
-}
-
-
-function checkWrittenAnswer(){
-
-  if(questionAnswered) return;
-
-  const input=document.getElementById("writeAnswer");
-
-  if(!input) return;
-
-  const userAnswer=normalizeAnswer(input.value);
-
-  if(userAnswer===""){
-
-    document.getElementById("feedback").textContent=
-      "⚠️ আগে উত্তর লিখুন।";
-
+    showPracticeResult();
     return;
   }
 
-  questionAnswered=true;
+  answered=false;
 
-  attempts++;
+  const w=practiceQuestions[practiceIndex];
 
-  const index=practiceQuestions[practiceIndex];
+  document.getElementById("practiceCount").textContent=
+    "প্রশ্ন "+(practiceIndex+1)+" / "+practiceQuestions.length;
 
-  const correct=
-    practiceMode==="bnToArWrite"
-      ? normalizeAnswer(words[index].ar)
-      : normalizeAnswer(words[index].meaning);
+  document.getElementById("feedback").textContent="";
 
-  if(userAnswer===correct){
+  document.getElementById("nextPractice").style.display="none";
 
-    rightAnswers++;
-    practiceScore++;
+  const q=document.getElementById("practiceQuestion");
 
-    document.getElementById("feedback").textContent=
-      "✅ সঠিক উত্তর!";
+  const label=document.getElementById("questionLabel");
 
-  }else{
+  const area=document.getElementById("answerArea");
 
-    document.getElementById("feedback").textContent=
-      `❌ ভুল। সঠিক উত্তর: ${
-        practiceMode==="bnToArWrite"
-        ? words[index].ar
-        : words[index].meaning
-      }`;
+  area.innerHTML="";
 
+  q.classList.remove("bangla");
+
+
+  if(practiceMode===1){
+
+    label.textContent="এর বাংলা অর্থ কী?";
+
+    q.textContent=w.arabic;
+
+    createOptions(w,"meaning");
   }
 
-  input.disabled=true;
 
-  saveData();
+  if(practiceMode===2){
 
-  document.getElementById("nextQuestion").style.display="block";
+    label.textContent="এর আরবি শব্দ কোনটি?";
+
+    q.textContent=w.meaning;
+
+    q.classList.add("bangla");
+
+    createOptions(w,"arabic");
+  }
+
+
+  if(practiceMode===3){
+
+    label.textContent="বাংলা অর্থ লিখুন";
+
+    q.textContent=w.arabic;
+
+    createInput(w,"meaning");
+  }
+
+
+  if(practiceMode===4){
+
+    label.textContent="আরবি শব্দ লিখুন";
+
+    q.textContent=w.meaning;
+
+    q.classList.add("bangla");
+
+    createInput(w,"arabic");
+  }
+
 }
 
 
-function normalizeAnswer(text){
+function createOptions(word,type){
+
+  let answers=[word[type]];
+
+  const pool=getPracticeWords();
+
+  const others=
+    pool
+    .filter(w=>w.id!==word.id)
+    .sort(()=>Math.random()-.5)
+    .slice(0,3);
+
+  others.forEach(w=>answers.push(w[type]));
+
+  answers=
+    [...new Set(answers)]
+    .sort(()=>Math.random()-.5);
+
+  const box=document.createElement("div");
+
+  box.className="options";
+
+  answers.forEach(answer=>{
+
+    const btn=document.createElement("button");
+
+    btn.className="option";
+
+    btn.textContent=answer;
+
+    btn.onclick=()=>checkOption(
+      btn,
+      answer,
+      word[type],
+      box
+    );
+
+    box.appendChild(btn);
+
+  });
+
+  document.getElementById("answerArea")
+  .appendChild(box);
+}
+
+
+function checkOption(btn,answer,correct,box){
+
+  if(answered) return;
+
+  answered=true;
+
+  practiceAttempts++;
+
+  if(answer===correct){
+
+    practiceRight++;
+    practiceScore++;
+
+    btn.classList.add("correct");
+
+    document.getElementById("feedback").textContent=
+      "✓ সঠিক উত্তর!";
+
+  }else{
+
+    btn.classList.add("wrong");
+
+    document.getElementById("feedback").textContent=
+      "✗ সঠিক উত্তর: "+correct;
+
+    [...box.children].forEach(b=>{
+
+      if(b.textContent===correct)
+        b.classList.add("correct");
+
+    });
+
+  }
+
+  save();
+
+  document.getElementById("nextPractice")
+  .style.display="block";
+}
+
+
+function createInput(word,type){
+
+  const area=document.getElementById("answerArea");
+
+  const input=document.createElement("input");
+
+  input.className="answer-input";
+
+  input.placeholder="উত্তর লিখুন";
+
+  const button=document.createElement("button");
+
+  button.className="check-btn";
+
+  button.textContent="উত্তর দেখুন";
+
+  button.onclick=()=>checkInput(
+    input,
+    word[type]
+  );
+
+  input.addEventListener("keydown",e=>{
+
+    if(e.key==="Enter")
+      checkInput(input,word[type]);
+
+  });
+
+  area.appendChild(input);
+  area.appendChild(button);
+
+  input.focus();
+}
+
+
+function normalize(text){
 
   return text
     .trim()
     .replace(/[ًٌٍَُِّْـ]/g,"")
-    .replace(/\s+/g," ")
-    .toLowerCase();
-
+    .replace(/\s+/g," ");
 }
 
 
-function nextPracticeQuestion(){
+function checkInput(input,correct){
+
+  if(answered) return;
+
+  answered=true;
+
+  practiceAttempts++;
+
+  const user=normalize(input.value);
+
+  const right=normalize(correct);
+
+  if(user===right){
+
+    practiceRight++;
+    practiceScore++;
+
+    document.getElementById("feedback").textContent=
+      "✓ সঠিক উত্তর!";
+
+  }else{
+
+    document.getElementById("feedback").textContent=
+      "✗ সঠিক উত্তর: "+correct;
+
+  }
+
+  save();
+
+  document.getElementById("nextPractice")
+  .style.display="block";
+}
+
+
+function nextPractice(){
 
   practiceIndex++;
-
-  if(practiceIndex>=practiceQuestions.length){
-
-    showPracticeResult();
-
-    return;
-  }
 
   showPracticeQuestion();
 }
@@ -1245,157 +1975,160 @@ function nextPracticeQuestion(){
 
 function showPracticeResult(){
 
-  document.getElementById("practiceQuiz").style.display="none";
-  document.getElementById("practiceResult").style.display="block";
+  document.getElementById("questionLabel").textContent=
+    "Practice শেষ";
 
-  const total=practiceQuestions.length;
+  document.getElementById("practiceQuestion").textContent=
+    "🎉 "+practiceScore+" / "+practiceQuestions.length;
 
-  const accuracy=Math.round(
-    (practiceScore/total)*100
-  );
+  document.getElementById("practiceQuestion")
+  .classList.add("bangla");
 
-  document.getElementById("practiceScore").textContent=
-    `${practiceScore} / ${total}`;
+  document.getElementById("answerArea").innerHTML=`
+    <button class="check-btn" onclick="startPractice()">
+      আবার Practice করুন
+    </button>
+  `;
 
-  document.getElementById("practiceResultText").innerHTML=
-    `Accuracy: <strong>${accuracy}%</strong><br><br>
-     ${practiceScore===total
-       ? "🎉 অসাধারণ!"
-       : "আরও একটু Practice করো।"}`;
+  document.getElementById("feedback").textContent=
+    "Accuracy: "+
+    Math.round(
+      practiceScore/practiceQuestions.length*100
+    )+"%";
 
+  document.getElementById("nextPractice")
+  .style.display="none";
 }
 
 
-/* ================= NAVIGATION ================= */
-
-function showSection(sectionId,button){
-
-  document.querySelectorAll(".section")
-    .forEach(section=>{
-      section.classList.remove("active");
-    });
-
-  document.getElementById(sectionId)
-    .classList.add("active");
-
-  document.querySelectorAll(".navBtn")
-    .forEach(btn=>{
-      btn.classList.remove("active");
-    });
-
-  if(button){
-    button.classList.add("active");
-  }
-
-  if(sectionId==="review"){
-    renderReview();
-  }
-
-  if(sectionId==="progress"){
-    updateProgress();
-  }
-
-}
-
-
-/* ================= PROGRESS ================= */
+/* =========================================================
+   PROGRESS
+========================================================= */
 
 function updateProgress(){
 
-  document.getElementById("topProgress").textContent=
-    `${learned.size} / ${words.length} মুখস্থ`;
+  const total=words.length;
 
-  document.getElementById("progressLearned").textContent=
-    learned.size;
+  const completed=
+    learnedWords.length+studyWords.length;
 
-  document.getElementById("progressStudy").textContent=
-    study.size;
+  const remaining=Math.max(
+    0,
+    total-completed
+  );
 
-  document.getElementById("progressRemaining").textContent=
-    words.length-learned.size-study.size;
+  let accuracy=0;
 
-  const accuracy=
-    attempts===0
-      ? 0
-      : Math.round((rightAnswers/attempts)*100);
+  if(practiceAttempts>0){
 
-  document.getElementById("progressAccuracy").textContent=
-    `${accuracy}%`;
+    accuracy=Math.round(
+      practiceRight/practiceAttempts*100
+    );
+
+  }
+
+  document.getElementById("learnedCount").textContent=
+    learnedWords.length;
+
+  document.getElementById("reviewCount").textContent=
+    studyWords.length;
+
+  document.getElementById("remainingCount").textContent=
+    remaining;
+
+  document.getElementById("accuracyCount").textContent=
+    accuracy+"%";
+
+
+  const box=
+    document.getElementById("progressCategories");
+
+  box.innerHTML="";
+
+  categories.forEach((cat,index)=>{
+
+    const indexes=categoryWordIndexes(index);
+
+    const done=indexes.filter(i=>
+      learnedWords.includes(i) ||
+      studyWords.includes(i)
+    ).length;
+
+    const unlocked=isCategoryUnlocked(index);
+
+    const complete=isCategoryComplete(index);
+
+    const div=document.createElement("div");
+
+    div.style.padding="10px 0";
+    div.style.borderBottom="1px solid #eee";
+
+    div.innerHTML=`
+      ${complete ? "✅" : unlocked ? "🔓" : "🔒"}
+      <strong>${cat.title}</strong>
+      <span style="float:right">
+        ${done}/${indexes.length}
+      </span>
+    `;
+
+    box.appendChild(div);
+
+  });
 
 }
 
 
-/* ================= STORAGE ================= */
+/* =========================================================
+   SAVE
+========================================================= */
 
-function saveData(){
+function save(){
+
+  updateCategoryCompletion();
 
   localStorage.setItem(
     "learnedWords",
-    JSON.stringify([...learned])
+    JSON.stringify(learnedWords)
   );
 
   localStorage.setItem(
     "studyWords",
-    JSON.stringify([...study])
+    JSON.stringify(studyWords)
+  );
+
+  localStorage.setItem(
+    "completedCategories",
+    JSON.stringify(completedCategories)
   );
 
   localStorage.setItem(
     "practiceAttempts",
-    attempts
+    practiceAttempts
   );
 
   localStorage.setItem(
     "practiceRight",
-    rightAnswers
+    practiceRight
   );
 
+  localStorage.setItem(
+    "selectedCategory",
+    selectedCategory
+  );
 }
 
 
-function resetProgress(){
+/* =========================================================
+   INITIAL
+========================================================= */
 
-  if(!confirm("সব Progress মুছে ফেলতে চান?")){
-    return;
-  }
+updateCategoryCompletion();
 
-  learned.clear();
-  study.clear();
+renderCategories();
 
-  attempts=0;
-  rightAnswers=0;
+loadNewWord();
 
-  saveData();
-
-  updateProgress();
-  renderReview();
-  loadLearn();
-
-}
-
-
-/* ================= UTILITY ================= */
-
-function shuffle(array){
-
-  const arr=[...array];
-
-  for(let i=arr.length-1;i>0;i--){
-
-    const j=Math.floor(Math.random()*(i+1));
-
-    [arr[i],arr[j]]=[arr[j],arr[i]];
-
-  }
-
-  return arr;
-}
-
-
-/* ================= START ================= */
-
-loadLearn();
 updateProgress();
-renderReview();
 
 </script>
 
